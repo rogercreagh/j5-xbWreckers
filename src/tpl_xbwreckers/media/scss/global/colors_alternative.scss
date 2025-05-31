@@ -1,0 +1,14 @@
+// Variables, Functions and Mixins
+@import "../tools/tools";
+@import "../../../../../vendor/bootstrap/scss/functions";
+
+:root {
+  --xbwreckers-color-primary: #{$alternative-color-primary};
+  // @deprecated --casiopeia-color-link is deprecated in favour of --link-color
+  --xbwreckers-color-link: #{$alternative-color-link};
+  --link-color: #{$alternative-color-link};
+  --link-color-rgb: #{to-rgb($alternative-color-link)};
+  --xbwreckers-color-hover: #{$alternative-color-hover};
+  --link-hover-color: #{$alternative-color-hover};
+  --link-hover-color-rgb: #{to-rgb($alternative-color-hover)};
+}

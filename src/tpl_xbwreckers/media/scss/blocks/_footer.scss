@@ -1,0 +1,45 @@
+// Footer
+
+.footer {
+  margin-top: $xbwreckers-grid-gutter;
+  color: $white;
+  background-color: var(--xbwreckers-color-primary);
+  background-image: $xbwreckers-header-grad #{"/* rtl:"}$xbwreckers-header-grad-rtl #{"*/"};
+
+  .grid-child {
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5rem ($xbwreckers-grid-gutter * .5);
+  }
+
+  a:not(.btn), .btn-link {
+    color: currentColor;
+
+    &:hover,
+    &:focus {
+      color: var(--gray-200);
+    }
+  }
+
+  .mod-menu {
+    position: relative;
+  }
+
+  @if $metismenu==true {
+    .metismenu.mod-menu {
+      .mm-collapse {
+        background: var(--xbwreckers-color-primary);
+      }
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    .grid-child {
+      flex-direction: column;
+
+      .mod-footer {
+        margin: .375rem 0;
+      }
+    }
+  }
+}

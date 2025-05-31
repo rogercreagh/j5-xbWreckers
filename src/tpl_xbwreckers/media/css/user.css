@@ -1,0 +1,63 @@
+.wrheader {
+    max-width: 1550px;
+    max-height: 350px;
+    margin:15px auto;
+    background-color: rgba(64,64,64,0.85);
+	background-blend-mode: multiply;
+	background-image: url(/media/templates/site/xbwreckers/images/wr-header-background.png);
+	border: solid #fff 1px;
+	border-radius: 15px;
+	box-shadow: rgba(255, 185, 51, 0.5) 0px 0px 10px 10px, inset rgba(255, 255, 255, 0.5) 0px 0px 10px 10px;
+}
+
+.wrheadergrid {
+    display: grid;
+	grid-template-columns: minmax(200px,300px) 1fr minmax(200px,290px);
+}
+
+.wrheadergrid-item {
+/*    border: 1px solid black; */
+    overflow: hidden;
+    max-height:295px;
+}
+
+.wrsite-circlelogo {
+	width: 255px;
+	height:255px;
+	margin:22px auto;
+}
+.wrsite-textlogo {
+	width:95%;
+	margin:20px auto 10px auto;
+	text-align:center;
+}
+
+.wrsite-slug {
+	font-size: 1.5rem;
+	font-weight:bold;
+	color: #efefef;
+	text-align: center;
+	margin-top:10px;
+}
+
+.wrsite-desc {
+	font-size: 1.0rem;
+	font-weight:bold;
+	color: #FFC955;
+	text-align: center;
+	margin:0 auto 20px auto;
+	width: 95%;
+	max-width: 680px;
+}
+.container-header {
+  background-image: unset;
+  background-color: #444;
+}
+
+.header .grid-child {
+  max-width:1550px;
+}
+
+.xbstreamer {
+  margin-top: 10px;
+}

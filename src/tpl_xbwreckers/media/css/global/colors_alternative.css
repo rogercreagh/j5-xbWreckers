@@ -1,0 +1,10 @@
+@charset "UTF-8";
+:root {
+  --xbwreckers-color-primary: #912b3b;
+  --xbwreckers-color-link: #30638d;
+  --link-color: #30638d;
+  --link-color-rgb: 48, 99, 141;
+  --xbwreckers-color-hover: #954b56;
+  --link-hover-color: #954b56;
+  --link-hover-color-rgb: 149, 75, 86;
+}
