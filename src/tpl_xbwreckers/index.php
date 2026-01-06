@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  Templates.xbwreckers
  * @author Roger Creagh-Osborne (C) 2025 based on Cassopedia template by Joomla
- * @version 0.0.1.1 21st May 2025
+ * @version 1.0.2.0 6th January 2026
  * @copyright   (C) 2025 Roger C-O <https:crosborne.uk> and (C) 2017 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */

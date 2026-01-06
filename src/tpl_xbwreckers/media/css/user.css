@@ -23,8 +23,13 @@
 
 .wrsite-circlelogo {
 	width: 255px;
-	height:255px;
+	height:255px;	
 	margin:22px auto;
+}
+@media (width < 560px) {
+	.wrsite-circlelogo {
+		display:none;
+	}
 }
 .wrsite-textlogo {
 	width:95%;
