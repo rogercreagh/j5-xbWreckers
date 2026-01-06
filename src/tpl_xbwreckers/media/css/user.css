@@ -59,5 +59,9 @@
 }
 
 .xbstreamer {
-  margin-top: 10px;
+	width:280px;
+	height:280px;
+	background-color: #222;
+	margin-left:10px;
+    margin-top: 7px;
 }

@@ -160,11 +160,9 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 <div>
     	<div class="wrheader wrheadergrid">
         	<div class="wrheadergrid-item">
-        		<div class="wrsite-circlelogo">
-            		<a href="<?php echo $this->baseurl; ?>/" title="<?php echo $sitename.' - home';?>">
-                    	<?php echo $logocircle; ?>
-                    </a>    	
-        		</div>
+                <div class="xbstreamer" >
+    				<jdoc:include type="modules" name="streamer" style="wrheader-stream" />
+                </div>
         	</div>
         	<div class="wrheadergrid-item">
                 <div class="wrsite-textlogo" >
@@ -182,9 +180,11 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
             </div>
         	<div class="wrheadergrid-item">
-                <div class="xbstreamer" >
-    				<jdoc:include type="modules" name="streamer" style="wrheader-stream" />
-                </div>
+        		<div class="wrsite-circlelogo">
+            		<a href="<?php echo $this->baseurl; ?>/" title="<?php echo $sitename.' - home';?>">
+                    	<?php echo $logocircle; ?>
+                    </a>    	
+        		</div>
          	</div>
         </div>
 </div>
