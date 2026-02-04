@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  Templates.xbwreckers
  * @author Roger Creagh-Osborne (C) 2025 based on Cassopedia template by Joomla
- * @version 1.0.2.0 6th January 2026
+ * @version 1.0.3.0 3rd February 2026
  * @copyright   (C) 2025 Roger C-O <https:crosborne.uk> and (C) 2017 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -21,16 +21,6 @@ $app   = Factory::getApplication();
 $input = $app->getInput();
 $wa    = $this->getWebAssetManager();
 
-// Browsers support SVG favicons
-// $this->addHeadLink(HTMLHelper::_('image', 'favicons/favicon-96x96.png', '', [], true, 1), 'icon', 'rel', ['type' => 'image/png']);
-// $this->addHeadLink(HTMLHelper::_('image', 'favicons/favicon.svg', '', [], true, 1), 'icon', 'rel', ['type' => 'image/svg+xml']);
-// $this->addHeadLink(HTMLHelper::_('image', 'favicons/favicon.ico', '', [], true, 1), 'shortcut icon', 'rel', ['type' => 'image/png']);
-// $this->addHeadLink(HTMLHelper::_('image', 'favicons/apple-touch-icon.png', '', ['sizes="180x180"'], true, 1), 'apple-touch-icon', 'rel', ['type' => 'image/png']);
-// $this->addHeadLink(HTMLHelper::_('meta', 'favicons/apple-touch-icon.png', '', ['sizes="180x180"'], true, 1), 'apple-touch-icon', 'rel', ['type' => 'image/png']);
-// $this->addHeadLink(HTMLHelper::_('image', 'favicons/apple-touch-icon.png', '', ['sizes="180x180"'], true, 1), 'apple-touch-icon', 'rel', ['type' => 'image/png']);
-//$this->addHeadLink(HTMLHelper::_('image', 'favicon.ico', '', [], true, 1), 'alternate icon', 'rel', ['type' => 'image/vnd.microsoft.icon']);
-//$this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon-pinned.svg', '', [], true, 1), 'mask-icon', 'rel', ['color' => '#000']);
-
 // Detecting Active Variables
 $option   = $input->getCmd('option', '');
 $view     = $input->getCmd('view', '');
@@ -44,41 +34,6 @@ $pageclass = $menu !== null ? $menu->getParams()->get('pageclass_sfx', '') : '';
 // Color Theme
 $paramsColorName = $this->params->get('colorName', 'colors_standard');
 $assetColorName  = 'theme.' . $paramsColorName;
-
-// // Use a font scheme if set in the template style options
-// $paramsFontScheme = $this->params->get('useFontScheme', false);
-// $fontStyles       = '';
-
-// if ($paramsFontScheme) {
-//     if (stripos($paramsFontScheme, 'https://') === 0) {
-//         $this->getPreloadManager()->preconnect('https://fonts.googleapis.com/', ['crossorigin' => 'anonymous']);
-//         $this->getPreloadManager()->preconnect('https://fonts.gstatic.com/', ['crossorigin' => 'anonymous']);
-//         $this->getPreloadManager()->preload($paramsFontScheme, ['as' => 'style', 'crossorigin' => 'anonymous']);
-//         $wa->registerAndUseStyle('fontscheme.current', $paramsFontScheme, [], ['rel' => 'lazy-stylesheet', 'crossorigin' => 'anonymous']);
-
-//         if (preg_match_all('/family=([^?:]*):/i', $paramsFontScheme, $matches) > 0) {
-//             $fontStyles = '--xbwreckers-font-family-body: "' . str_replace('+', ' ', $matches[1][0]) . '", sans-serif;
-// 			--xbwreckers-font-family-headings: "' . str_replace('+', ' ', $matches[1][1] ?? $matches[1][0]) . '", sans-serif;
-// 			--xbwreckers-font-weight-normal: 400;
-// 			--xbwreckers-font-weight-headings: 700;';
-//         }
-//     } elseif ($paramsFontScheme === 'system') {
-//         $fontStylesBody    = $this->params->get('systemFontBody', '');
-//         $fontStylesHeading = $this->params->get('systemFontHeading', '');
-
-//         if ($fontStylesBody) {
-//             $fontStyles = '--xbwreckers-font-family-body: ' . $fontStylesBody . ';
-//             --xbwreckers-font-weight-normal: 400;';
-//         }
-//         if ($fontStylesHeading) {
-//             $fontStyles .= '--xbwreckers-font-family-headings: ' . $fontStylesHeading . ';
-//     		--xbwreckers-font-weight-headings: 700;';
-//         }
-//     } else {
-//         $wa->registerAndUseStyle('fontscheme.current', $paramsFontScheme, ['version' => 'auto'], ['rel' => 'lazy-stylesheet']);
-//         $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')->getUri() . '?' . $this->getMediaVersion(), ['as' => 'style']);
-//     }
-// }
 
 // Enable assets
 $wa->usePreset('template.xbwreckers.' . ($this->direction === 'rtl' ? 'rtl' : 'ltr'))
@@ -173,8 +128,14 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
                 </div>
                 <div class="wrsite-desc">
                 	<p><?php if ($this->params->get('siteDescription') == '') : ?>
-                	Specialising in supporting local musicians and venues with live music<br /> from, or about, or played "West-the-Exe". <br />Any genre so long as local folk are involved.
+                	Specialising in supporting local musicians and venues with live music<br /> from, or about, or played "West-the-Exe".
                 	<?php else : echo htmlspecialchars($this->params->get('siteDescription')); endif; ?>
+                	</p>
+                </div>
+                <div class="wrsite-desc2">
+                	<p><?php if ($this->params->get('siteDescription2') == '') : ?>
+                	    Any genre so long as local folk are involved!
+                	<?php else : echo htmlspecialchars($this->params->get('siteDescription2')); endif; ?>
                 	</p>
                 </div>
 
