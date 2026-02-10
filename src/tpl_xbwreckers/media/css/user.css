@@ -27,7 +27,7 @@
 	max-height:255px;
 	margin:22px auto;
 }
-@media (width < 1059px) {
+@media (width < 1100px) {
     .wrsite-desc2 {
       display:none;
     }
