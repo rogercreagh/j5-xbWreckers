@@ -82,6 +82,9 @@
 	width: 95%;
 	max-width: 680px;
 }
+.wrsite-desc p {
+	margin-bottom:0;
+}
 .wrsite-desc2 {
 	font-size: 1.0rem;
 	font-weight:normal;

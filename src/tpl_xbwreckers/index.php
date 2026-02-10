@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  Templates.xbwreckers
  * @author Roger Creagh-Osborne (C) 2025 based on Cassopedia template by Joomla
- * @version 1.0.3.0 3rd February 2026
+ * @version 1.0.3.0 7th February 2026
  * @copyright   (C) 2025 Roger C-O <https:crosborne.uk> and (C) 2017 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -123,12 +123,15 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
                 <div class="wrsite-textlogo" >
                  	<?php echo $logotext; ?>                
                 </div>
-                <div class="wrsite-slug">
-                	<?php echo htmlspecialchars($this->params->get('siteSlug')); ?>
+                <div class="wrsite-slug"><?php if ($this->params->get('siteDescription') == '') : ?>
+                	Music from West-the-Exe
+                	<?php else: ?>
+                		<?php echo htmlspecialchars($this->params->get('siteSlug')); ?>
+                	<?php endif; ?>
                 </div>
                 <div class="wrsite-desc">
                 	<p><?php if ($this->params->get('siteDescription') == '') : ?>
-                	Specialising in supporting local musicians and venues with live music<br /> from, or about, or played "West-the-Exe".
+                	Supporting local musicians and venues with live music from, or about, or played "West-the-Exe" <span style="font-weight:normal; font-size:0.9rem; font-style: italic;">(ie&nbsp;Cornwall &amp; most of Devon)</span>
                 	<?php else : echo htmlspecialchars($this->params->get('siteDescription')); endif; ?>
                 	</p>
                 </div>
