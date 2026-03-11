@@ -85,35 +85,106 @@ return new class () implements InstallerScriptInterface {
             $manifest = $adapter->manifest;
             $msg = '';
             if ($type == 'update') {
+                $url = $manifest->changelogurl;
+                $ext_mess = '<div style="position: relative; margin: 15px 15px 15px -15px; padding: 1rem; border:solid 1px #444; border-radius: 6px;">';
+                $ext_mess .= $this->showChanglog($manifest->version, $url);
+                $ext_mess .= '</div>';
+                echo $ext_mess;
+                
                 $msg .= '<p><b>'.$this->extname.'</b> Template has been updated from '.$this->oldver.' of '.$this->olddate;
                 $msg .= ' to v<b>'.$manifest->version.'</b> dated '.$manifest->creationDate.'</p>';
             } else {
                 $msg .= '<p><b>'.$this->extname.'</b> Template v<b>'.$manifest->version.'</b> dated '.$manifest->creationDate.' installed ok.</p>';
             }
-//            if (Folder::exists(JPATH_ROOT.'/streamer')) {
-//                $res = Folder::delete(JPATH_ROOT.'/streamer/');
-//            }
-//            $res = $this->deleteDirectorySPL(JPATH_ROOT.'/streamer/');
-//            if ($res == false) {
-//                $app->enqueueMessage('old streamer not found <code>'.JPATH_ROOT.'/streamer/</code>');                   
-//            } else {
-//                $app->enqueueMessage('removed old streamer <code>'.JPATH_ROOT.'/streamer/</code>');                   
- //           }
-//            $app->enqueueMessage('moving <code>'.JPATH_ROOT.'/templates/'.$this->extslug.'/streamer/</code>');
-//            $res = Folder::move(JPATH_ROOT . '/templates/'.$this->extslug.'/streamer/',JPATH_ROOT.'/');
- //           $res = $this->rmove(JPATH_ROOT . '/templates/'.$this->extslug.'/streamer/',JPATH_ROOT.'/');
-//            if ($res !== true) {
-//                $app->enqueueMessage($res.'<br />Error moving <code>'.JPATH_ROOT . '/templates/'.$this->extslug.'/streamer/</code> to site root. Extract folder from zip file and upload to site root manually (eg using SFTP)', 'error');
-    //            return false;
-//            } else {
-//                $msg .= ' '.'Streamer tool moved to site root ok.</p>';
-//            }
             $msg .= 'Now set template parameters in <code>Extensions | Templates | Styles and Templates</code>';
             $app->enqueueMessage($msg);
         } elseif($type=='uninstall') {
             $app->enqueueMessage('Uninstalled '.$this->extname.' v'.$this->oldver.' of '.$this->olddate);
         }
         return true;
+    }
+
+    function showChanglog($ver, $url) {
+        $output = '<div style="max-width: 750px; background-color: white; border: 1px solid black; padding:15px 25px; margin:10px auto; font-size:0.9rem;">';
+        if (!$this->remoteFileExists($url)) {
+            $output .= '<p style="color:red;">Could not find changelog file <code>'.$url.'</code></p></div>';
+            return $output;
+        }
+        $xml = simplexml_load_file($url, null , LIBXML_NOCDATA);
+        if ($xml===false) {
+            $output .= '<p style="color:red;">Could not parse changelog file <code>'.$url.'</code></p></div>';
+            return $output;
+        } else {
+            $json = json_encode($xml);
+            $changelog = json_decode($json,true);
+            $log = 0;
+            if (array_key_exists('element',$changelog)) {
+                //only 1 changelog in file
+                $log = $changelog;
+                $newver = $log['version'];
+                if (version_compare($newver, $ver) !== 0) {
+                    $output.= '<p style="color:red;">Changelog for v'.$ver.' not found. v'.$newver.' is only one available.</p>';
+                }
+            } else {
+                $changelog = $changelog['changelog'];
+                //look for current version
+                for ($i = 0; $i < count($changelog); $i++) {
+                    if (version_compare($changelog[$i]['version'], $ver) === 0) $log = $changelog[$i];
+                }
+                if ($log === 0 ) {
+                    $log = $changelog[0];
+                    $output.= '<p style="color:red;">Changelog for v'.$ver.' not found; displaying most recent</p>';
+                }
+            }
+            $output .= '<h4>Changelog for ';
+            
+            if (key_exists('title',$log)) {
+                $output .= $log['title'];
+                //               unset($log['title']);
+            } else {
+                $output .= $log['element'];
+            }
+            $output .= ' v'.$log['version'].' ';
+            if (key_exists('date',$log)) {
+                $output .= $log['date'];
+            }
+            $output .= '</h4><hr />';
+            
+            $colours = array('security'=>'bg-danger', 'addition'=>'bg-success', 'fix'=>'bg-dark','language'=>'bg-primary',
+                'change'=>'bg-warning text-dark','remove'=>'bg-secondary','note'=>'bg-info'
+            );
+            $output .= '<table style="margin-left:20px; width:90%;">';
+            foreach ($colours as $colkey=>$col) {
+                if ((isset($log[$colkey])) && isset($log[$colkey]['item'])) {
+                    $output .= '<tr style="border-bottom:1px solid #888;"><td style="background-color:#ddd; vertical-align: top; padding: 5px 10px;">';
+                    $output .=  '<span class="badge '.$col.'" style="font-size: 0.8rem;padding: 0.3rem 0.5rem;">'.$colkey.'</span>';
+                    $output .= '</td><td style="vertical-align: top; padding: 5px 10px;"><ul>';
+                    if (is_array($log[$colkey]['item'])) {
+                        foreach ($log[$colkey]['item'] as $item) {
+                            $output .= '<li>'.$item.'</li>';
+                        }
+                    } else {
+                        $output .= '<li>'.$log[$colkey]['item'].'</li>';
+                    }
+                    $output .= '</ul></td></tr>';
+                }
+            }
+            $output .= '</table>';
+        }
+        $output .= '</div>';
+        return $output;
+    }
+    
+    function remoteFileExists($url) {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, true);      // Don't fetch the body
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);       // Set timeout
+        curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        
+        return $httpCode === 200;
     }
     
 };

@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  Templates.xbwreckers
  * @author Roger Creagh-Osborne (C) 2025 based on Cassopedia template by Joomla
- * @version 1.0.3.0 7th February 2026
+ * @version 1.0.5.3 11th March 2026
  * @copyright   (C) 2025 Roger C-O <https:crosborne.uk> and (C) 2017 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -36,9 +36,13 @@ $paramsColorName = $this->params->get('colorName', 'colors_standard');
 $assetColorName  = 'theme.' . $paramsColorName;
 
 // Enable assets
+
+$wa->useScript('jquery');
+$wa->useScript('jquery-noconflict');
 $wa->usePreset('template.xbwreckers.' . ($this->direction === 'rtl' ? 'rtl' : 'ltr'))
     ->useStyle('template.active.language')
     ->registerAndUseStyle($assetColorName, 'global/' . $paramsColorName . '.css')
+    ->useStyle('template.wreckers')
     ->useStyle('template.user')
     ->useScript('template.user')
     ->addInlineStyle(":root {
@@ -83,6 +87,8 @@ $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
 
 $stickyHeader = $this->params->get('stickyHeader') ? 'position-sticky sticky-top' : '';
 
+$testMode = $this->params->get('testMode') ? 'style="background-color: rgba(192,32,32,0.85); border-color: 1px solid red;"' : '';
+
 // Defer fontawesome for increased performance. Once the page is loaded javascript changes it to a stylesheet.
 $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 ?>
@@ -102,22 +108,31 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 </head>
 
 <body class="site <?php echo $option
-    . ' ' . $wrapper
-    . ' view-' . $view
-    . ($layout ? ' layout-' . $layout : ' no-layout')
-    . ($task ? ' task-' . $task : ' no-task')
-    . ($itemid ? ' itemid-' . $itemid : '')
-    . ($pageclass ? ' ' . $pageclass : '')
-    . $hasClass
-    . ($this->direction == 'rtl' ? ' rtl' : '');
-?>">
+        . ' ' . $wrapper
+        . ' view-' . $view
+        . ($layout ? ' layout-' . $layout : ' no-layout')
+        . ($task ? ' task-' . $task : ' no-task')
+        . ($itemid ? ' itemid-' . $itemid : '')
+        . ($pageclass ? ' ' . $pageclass : '')
+        . $hasClass
+        . ($this->direction == 'rtl' ? ' rtl' : '');
+    ?>" <?php if($testMode != '') echo 'style="border:2px solid red;"'; ?>
+>
 	<header class="header container-header full-width<?php echo $stickyHeader ? ' ' . $stickyHeader : ''; ?>">
 <div>
-    	<div class="wrheader wrheadergrid">
+    	<div class="wrheader wrheadergrid" <?php echo $testMode; ?>>
         	<div class="wrheadergrid-item">
-                <div class="xbstreamer" >
-    				<jdoc:include type="modules" name="streamer" style="wrheader-stream" />
-                </div>
+          		<?php if ($this->countModules('xbazhead', true)) : ?>
+                    <div class="xbazhead" >
+        				<jdoc:include type="modules" name="xbazhead" style="wrheader-stream" />
+                    </div>
+         		<?php else : ?>
+            		<div class="wrsite-circlelogo">
+                		<a href="<?php echo $this->baseurl; ?>/" title="<?php echo $sitename.' - home';?>">
+                        	<?php echo $logocircle; ?>
+                        </a>    	
+            		</div>
+        		<?php endif; ?>
         	</div>
         	<div class="wrheadergrid-item">
                 <div class="wrsite-textlogo" >
@@ -144,11 +159,15 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
             </div>
         	<div class="wrheadergrid-item">
-        		<div class="wrsite-circlelogo">
-            		<a href="<?php echo $this->baseurl; ?>/" title="<?php echo $sitename.' - home';?>">
-                    	<?php echo $logocircle; ?>
-                    </a>    	
-        		</div>
+         		<?php if ($this->countModules('xbnlhead', true)) : ?>
+                    <jdoc:include type="modules" name="xbnlhead" style="card" />         			
+         		<?php else : ?>
+            		<div class="wrsite-circlelogo headrt">
+                		<a href="<?php echo $this->baseurl; ?>/" title="<?php echo $sitename.' - home';?>">
+                        	<?php echo $logocircle; ?>
+                        </a>    	
+            		</div>
+        		<?php endif; ?>
          	</div>
         </div>
 </div>
@@ -192,6 +211,9 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
 
         <div class="grid-child container-component">
+        	<?php if ($this->countModules('xbnlmaintop', true)) : ?>
+            	<jdoc:include type="modules" name="xbnlmaintop" style="card" />
+            <?php endif; ?>
             <jdoc:include type="modules" name="breadcrumbs" style="none" />
             <jdoc:include type="modules" name="main-top" style="card" />
             <jdoc:include type="message" />

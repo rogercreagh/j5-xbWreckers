@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="template" client="site" method="upgrade">
 	<name>xbwreckers</name>
-	<version>1.0.4.1</version>
-	<creationDate>10th February 2026</creationDate>
+	<version>1.0.5.3</version>
+	<creationDate>11th March 2026</creationDate>
 	<author>Roger C-O</author>
 	<authorEmail>roger@crosborne.uk</authorEmail>
 	<copyright>(C) 2026,2017 Roger C-O and Open Source Matters, Inc.</copyright>
@@ -16,8 +16,7 @@
 		<filename>joomla.asset.json</filename>
 		<filename>offline.php</filename>
 		<filename>templateDetails.xml</filename>
-		<folder>html</folder>
-		<folder>streamer</folder>
+		<folder>html</folder>		
 	</files>
 	<media destination="templates/site/xbwreckers" folder="media">
 		<folder>js</folder>
@@ -25,7 +24,20 @@
 		<folder>scss</folder>
 		<folder>images</folder>
 	</media>
+
+    <!-- CHANGE THESE TO GITHUB ONCE PUBLISHED -->
+    <changelogurl>http://j5.localhost/updateserver/changelog_xbwreckers.xml</changelogurl>
+	    <!--https://raw.githubusercontent.com/rogercreagh/j5-xbMusic/main/changelog_xbmusic.xml -->
+    <updateservers>
+	    <server type="extension" name="xbAzHead Module Updates">
+	    	http://j5.localhost/updateserver/update_xbwreckers.xml
+	    </server>
+			<!-- https://raw.githubusercontent.com/rogercreagh/j5-xbMusic/main/update_xbmusic.xml -->
+	</updateservers>
+	
 	<positions>
+		<position>xbazhead</position>
+		<position>xbnlhead</position>
 		<position>topbar</position>
 		<position>below-top</position>
 		<position>menu</position>
@@ -152,6 +164,17 @@
 					name="backTop"
 					type="radio"
 					label="TPL_XBWRECKERS_BACKTOTOP_LABEL"
+					layout="joomla.form.field.radio.switcher"
+					default="0"
+					filter="integer"
+					>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="testMode"
+					type="radio"
+					label="Running on Test Server"
 					layout="joomla.form.field.radio.switcher"
 					default="0"
 					filter="integer"

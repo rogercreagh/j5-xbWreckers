@@ -39,17 +39,28 @@
         "template.active"
       ]
     },
-    {
-      "name": "template.user",
-      "description": "A file where a user can add their own css.",
-      "type": "style",
-      "uri": "user.css",
-      "weight": 500,
-      "dependencies": [
-        "template.active",
-        "template.active.language"
-      ]
-    },
+	{
+	  "name": "template.wreckers",
+	  "description": "Specific Wreckers Radio styles",
+	  "type": "style",
+	  "uri": "wreckersradio.css",
+	  "weight": 500,
+	  "dependencies": [
+	    "template.active",
+	    "template.active.language"
+	  ]
+	},
+	{
+	  "name": "template.user",
+	  "description": "A file where a user can add their own css.",
+	  "type": "style",
+	  "uri": "user.css",
+	  "weight": 500,
+	  "dependencies": [
+	    "template.active",
+	    "template.active.language"
+	  ]
+	},
     {
       "name": "template.xbwreckers",
       "description": "The file containing the javascript for this template.",

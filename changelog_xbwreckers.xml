@@ -1,0 +1,31 @@
+<changelogs>
+	<changelog>
+		<element>tpl_xbwreckers</element>
+		<type>template</type>
+		<version>1.0.5.2</version>
+		<addition>
+			<item><![CDATA[<h3>Development Release v1.0.5.2</h3> Updated 10th March 2026]]></item>
+			<item>Player and Newsletter positions in header</item>
+			<item>Test mode config option colours header</item>
+		</addition>
+		<remove>
+		</remove>
+		<change>
+		</change>
+		<fix>
+		</fix>
+		<language>
+			<item>en-GB only</item>
+		</language>
+		<security>
+		</security>
+		<note>
+			<item>This xbWreckers template is designed specifically for the Wreckers.Radio website</item>
+			<item><![CDATA[for Documentation see <a href="https://github.com/rogercreagh/j5-xbwreckers" target="_blank">GitHub README file</a>]]></item>
+			<item>Not listed on JED (Joomla Extensions Directory)</item>
+			<item><![CDATA[Raise bugs comments and feature requests on <a href="https://github.com/rogercreagh/j5-xbwreckers/issues" target="_blank">GitHub</a>]]></item>
+		</note>
+		<date>10th March 2026</date>
+		<title>xbWreckers Joomla Template</title>
+	</changelog>	
+</changelogs>	

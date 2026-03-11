@@ -1,0 +1,148 @@
+/*******
+ * @package xbWreckers Template
+ * @filesource media/templates/site/xbwreckers/css/xbazhead.css
+ * @version 1.0.5.3 11th March 2026
+ * @author Roger C-O
+ * @copyright Copyright (c) Roger Creagh-Osborne, 2026
+ * @license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ ******/
+ .site{
+ 	background-color:#777;
+ }
+ .breadcrumb {
+ 	background-color: white;
+ }
+ main {
+ 	background-color: white;
+	padding: 5px 10px 5px 15px;
+}
+.modnsintro p {
+  color:yellow;
+  background-color:#444;
+  padding:2px 5px;
+}
+.wrheader {
+    max-width: 1550px;
+    max-height: 750px;
+    margin:15px auto;
+    background-color: rgba(64,64,64,0.85);
+	background-blend-mode: multiply;
+	background-image: url(/media/templates/site/xbwreckers/images/wr-header-background.png);
+	border: solid #fff 1px;
+	border-radius: 15px;
+	box-shadow: rgba(255, 185, 51, 0.5) 0px 0px 10px 10px, inset rgba(255, 255, 255, 0.5) 0px 0px 10px 10px;
+}
+
+.wrheadergrid {
+    display: grid;
+	grid-template-columns: minmax(290px,300px) 1fr minmax(0px,290px);
+    place-items: center;
+}
+
+.wrheadergrid-item {
+    overflow: hidden;
+    max-height:295px;
+}
+
+.wrsite-circlelogo {
+	max-width: 255px;
+	max-height:255px;
+	margin:22px auto;
+}
+
+@media (width < 1100px) {
+    .wrsite-desc2 {
+      display:none;
+    }
+}
+@media (width < 910px) {
+    .wrsite-desc {
+      display:none;
+    }
+    .wrheadergrid {
+		grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+		gap: 1rem;
+    }
+	.wrheadergrid-item:has(.wrsite-circlelogo.headrt) {
+		display:none;
+    }
+}
+@media (width < 700px) {
+	.wrsite-slug {
+		display: none;
+	}
+}
+@media (width<500px) {
+	.wrsite-textlogo {
+		display: none;
+	}
+    .wrheadergrid {
+	    grid-template-columns: 1fr;
+    }
+}
+.wrsite-textlogo {
+	width:95%;
+	margin:20px auto 10px auto;
+	text-align:center;
+}
+
+.wrsite-slug {
+	font-size: 1.5rem;
+	font-weight:bold;
+	color: #efefef;
+	text-align: center;
+	margin-top:10px;
+}
+
+.wrsite-desc {
+	font-size: 1.0rem;
+	font-weight:bold;
+	color: #FFC955;
+	text-align: center;
+	margin:0 auto 10px auto;
+	width: 95%;
+	max-width: 680px;
+}
+.wrsite-desc p {
+	margin-bottom:0;
+}
+.wrsite-desc2 {
+	font-size: 1.0rem;
+	font-weight:normal;
+	color: #f8e45c;
+	text-align: center;
+	margin:0 auto 10px auto;
+	width: 95%;
+	max-width: 950px;
+}
+.container-header {
+	background-image: unset;
+	background-color: #444;
+}
+
+.header .grid-child {
+	max-width:1550px;
+}
+
+.xbazhead {
+	width:265px;
+	height:280px;
+	background-color: #222;
+	margin-left:10px;
+    margin-top: 7px;
+	border:1px solid white;
+	padding: 2px 5px;
+}
+ .xbnlhead.card {
+	background-color:rgba(128,128,128,0.5);
+	width:265px;
+ }
+.modnsintro p {
+	color:yellow;
+	background-color:#555;
+	padding:2px 5px;
+}
+.xbnlhead.card .modns.btn.btn-primary.button {
+	margin: 0 auto 5px auto;
+	border:1px solid yellow;
+}
