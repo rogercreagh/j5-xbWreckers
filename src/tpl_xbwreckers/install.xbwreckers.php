@@ -85,11 +85,11 @@ return new class () implements InstallerScriptInterface {
             $manifest = $adapter->manifest;
             $msg = '';
             if ($type == 'update') {
-                $url = $manifest->changelogurl;
-                $ext_mess = '<div style="position: relative; margin: 15px 15px 15px -15px; padding: 1rem; border:solid 1px #444; border-radius: 6px;">';
-                $ext_mess .= $this->showChanglog($manifest->version, $url);
-                $ext_mess .= '</div>';
-                echo $ext_mess;
+//                 $url = $manifest->changelogurl;
+//                 $ext_mess = '<div style="position: relative; margin: 15px 15px 15px -15px; padding: 1rem; border:solid 1px #444; border-radius: 6px;">';
+//                 $ext_mess .= $this->showChanglog($manifest->version, $url);
+//                 $ext_mess .= '</div>';
+//                 echo $ext_mess;
                 
                 $msg .= '<p><b>'.$this->extname.'</b> Template has been updated from '.$this->oldver.' of '.$this->olddate;
                 $msg .= ' to v<b>'.$manifest->version.'</b> dated '.$manifest->creationDate.'</p>';

@@ -2,9 +2,9 @@
 	<changelog>
 		<element>tpl_xbwreckers</element>
 		<type>template</type>
-		<version>1.0.5.2</version>
+		<version>1.0.5.3</version>
 		<addition>
-			<item><![CDATA[<h3>Development Release v1.0.5.2</h3> Updated 10th March 2026]]></item>
+			<item><![CDATA[<h3>Beta Release v1.0.5.3</h3> Updated 16th March 2026]]></item>
 			<item>Player and Newsletter positions in header</item>
 			<item>Test mode config option colours header</item>
 		</addition>
@@ -25,7 +25,5 @@
 			<item>Not listed on JED (Joomla Extensions Directory)</item>
 			<item><![CDATA[Raise bugs comments and feature requests on <a href="https://github.com/rogercreagh/j5-xbwreckers/issues" target="_blank">GitHub</a>]]></item>
 		</note>
-		<date>10th March 2026</date>
-		<title>xbWreckers Joomla Template</title>
 	</changelog>	
 </changelogs>	
