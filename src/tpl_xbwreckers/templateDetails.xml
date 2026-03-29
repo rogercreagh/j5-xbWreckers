@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="template" client="site" method="upgrade">
 	<name>xbwreckers</name>
-	<version>1.0.5.3</version>
+	<version>1.0.6.0</version>
 	<creationDate>16th March 2026</creationDate>
 	<author>Roger C-O</author>
 	<authorEmail>roger@crosborne.uk</authorEmail>
@@ -25,13 +25,11 @@
 		<folder>images</folder>
 	</media>
 
-    <!-- CHANGE THESE TO GITHUB ONCE PUBLISHED -->
     <changelogurl>https://raw.githubusercontent.com/rogercreagh/j5-xbWreckers/main/changelog_xbwreckers.xml</changelogurl>
     <updateservers>
-	    <server type="extension" name="xbAzHead Module Updates">
+	    <server type="extension" name="xbWreckers Template Updates">
 	    	https://raw.githubusercontent.com/rogercreagh/j5-xbWreckers/main/update_xbwreckers.xml
 	    </server>
-			<!-- https://raw.githubusercontent.com/rogercreagh/j5-xbMusic/main/update_xbmusic.xml -->
 	</updateservers>
 	
 	<positions>
