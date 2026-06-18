@@ -1,10 +1,10 @@
 <?php
-
 /**
  * @package     Joomla.Site
  * @subpackage  Templates.xbwreckers
- *
- * @copyright   (C) 2017 Open Source Matters, Inc. <https://www.joomla.org>
+ * @author Roger Creagh-Osborne (C) 2025 based on Cassopedia template by Joomla
+ * @version 1.0.7.0 18th June 2026
+ * @copyright   (C) 2026 Roger C-O <https:crosborne.uk> and (C) 2017 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -14,6 +14,155 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
+
+/** @var Joomla\CMS\Document\ErrorDocument $this */
+
+$app   = Factory::getApplication();
+$input = $app->getInput();
+$wa    = $this->getWebAssetManager();
+
+// Detecting Active Variables
+$option   = $input->getCmd('option', '');
+$view     = $input->getCmd('view', '');
+$layout   = $input->getCmd('layout', '');
+$task     = $input->getCmd('task', '');
+$itemid   = $input->getCmd('Itemid', '');
+$sitename = htmlspecialchars($app->get('sitename'), ENT_QUOTES, 'UTF-8');
+$menu     = $app->getMenu()->getActive();
+$pageclass = $menu !== null ? $menu->getParams()->get('pageclass_sfx', '') : '';
+
+// Color Theme
+$paramsColorName = $this->params->get('colorName', 'colors_standard');
+$assetColorName  = 'theme.' . $paramsColorName;
+
+// Enable assets
+
+$wa->useScript('jquery');
+$wa->useScript('jquery-noconflict');
+$wa->usePreset('template.xbwreckers.' . ($this->direction === 'rtl' ? 'rtl' : 'ltr'))
+->useStyle('template.active.language')
+->registerAndUseStyle($assetColorName, 'global/' . $paramsColorName . '.css')
+->useStyle('template.wreckers')
+->useStyle('template.user')
+->useScript('template.user')
+->addInlineStyle(":root {
+		--hue: 214;
+		--template-bg-light: #f0f4fb;
+		--template-text-dark: #495057;
+		--template-text-light: #ffffff;
+		--link-color: var(--link-color);
+		--template-special-color: #001B4C;
+	}");
+
+// Override 'template.active' asset to set correct ltr/rtl dependency
+$wa->registerStyle('template.active', '', [], [], ['template.xbwreckers.' . ($this->direction === 'rtl' ? 'rtl' : 'ltr')]);
+
+// Browsers support SVG favicons
+$this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1), 'icon', 'rel', ['type' => 'image/svg+xml']);
+$this->addHeadLink(HTMLHelper::_('image', 'favicon.ico', '', [], true, 1), 'alternate icon', 'rel', ['type' => 'image/vnd.microsoft.icon']);
+$this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon-pinned.svg', '', [], true, 1), 'mask-icon', 'rel', ['color' => '#000']);
+
+
+// Logo file or site title param
+if ($this->params->get('logoFileLeft')) {
+    $logocircle = HTMLHelper::_('image', Uri::root(false) . htmlspecialchars($this->params->get('logoFileLeft'), ENT_QUOTES), $sitename, ['loading' => 'eager', 'decoding' => 'async'], false, 0);
+} else {
+    $logocircle = HTMLHelper::_('image', Uri::root(false) . '/media/templates/site/xbwreckers/images/wr-circle-logo-250.png', $sitename, ['loading' => 'eager', 'decoding' => 'async'], false, 0);
+}
+
+if ($this->params->get('logoFileCentre')) {
+    $logotext = HTMLHelper::_('image', Uri::root(false) . htmlspecialchars($this->params->get('logoFileCentre'), ENT_QUOTES), $sitename, ['loading' => 'eager', 'decoding' => 'async'], false, 0);
+} else {
+    $logotext = HTMLHelper::_('image', Uri::root(false) . '/media/templates/site/xbwreckers/images/wr-text-logo-350.png', $sitename, ['loading' => 'eager', 'decoding' => 'async'], false, 0);
+}
+
+$hasClass = '';
+
+// Container
+$wrapper = $this->params->get('fluidContainer') ? 'wrapper-fluid' : 'wrapper-static';
+
+$this->setMetaData('viewport', 'width=device-width, initial-scale=1');
+
+// Defer font awesome
+$wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
+$testMode = $this->params->get('testMode') ? 'style="background-color: rgba(192,32,32,0.85); border-color: 1px solid red;"' : '';
+
+// Get the error code
+$errorCode = $this->error->getCode();
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
+<head>
+    <jdoc:include type="metas" />
+    <jdoc:include type="styles" />
+    <jdoc:include type="scripts" />
+</head>
+
+<body class="site error_site <?php echo $option
+    . ' ' . $wrapper
+    . ' view-' . $view
+    . ($layout ? ' layout-' . $layout : ' no-layout')
+    . ($task ? ' task-' . $task : ' no-task')
+    . ($itemid ? ' itemid-' . $itemid : '')
+    . ' ' . $pageclass;
+    echo ($this->direction == 'rtl' ? ' rtl' : '');
+?>">
+	<header class="header container-header full-width<?php echo $stickyHeader ? ' ' . $stickyHeader : ''; ?>">
+<div>
+    	<div class="wrheader wrheadergrid" <?php echo $testMode; ?>>
+        	<div class="wrheadergrid-item">
+            		<div class="wrsite-circlelogo">
+                		<a href="<?php echo $this->baseurl; ?>/" title="<?php echo $sitename.' - home';?>">
+                        	<?php echo $logocircle; ?>
+                        </a>    	
+            		</div>
+        	</div>
+        	<div class="wrheadergrid-item">
+                <div class="wrsite-textlogo" >
+                 	<?php echo $logotext; ?>                
+                </div>
+                <div class="wrsite-slug"><?php if ($this->params->get('siteDescription') == '') : ?>
+                	Music from West-the-Exe
+                	<?php else: ?>
+                		<?php echo htmlspecialchars($this->params->get('siteSlug')); ?>
+                	<?php endif; ?>
+                </div>
+                <div class="wrsite-desc">
+                	<p><?php if ($this->params->get('siteDescription') == '') : ?>
+                	Supporting local musicians and venues with live music from, or about, or played "West-the-Exe" <span style="font-weight:normal; font-size:0.9rem; font-style: italic;">(ie&nbsp;Cornwall &amp; most of Devon)</span>
+                	<?php else : echo htmlspecialchars($this->params->get('siteDescription')); endif; ?>
+                	</p>
+                </div>
+                <div class="wrsite-desc2">
+                	<p><?php if ($this->params->get('siteDescription2') == '') : ?>
+                	    Any genre so long as local folk are involved!
+                	<?php else : echo htmlspecialchars($this->params->get('siteDescription2')); endif; ?>
+                	</p>
+                </div>
+
+            </div>
+        	<div class="wrheadergrid-item">
+            		<div class="wrsite-circlelogo headrt">
+                		<a href="<?php echo $this->baseurl; ?>/" title="<?php echo $sitename.' - home';?>">
+                        	<?php echo $logocircle; ?>
+                        </a>    	
+            		</div>
+         	</div>
+        </div>
+</div>
+        <?php if ($this->countModules('menu', true) || $this->countModules('search', true)) : ?>
+            <div class="grid-child container-nav">
+                <?php if ($this->countModules('menu', true)) : ?>
+                    <jdoc:include type="modules" name="menu" style="none" />
+                <?php endif; ?>
+                <?php if ($this->countModules('search', true)) : ?>
+                    <div class="container-search">
+                        <jdoc:include type="modules" name="search" style="none" />
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+    </header>
 
 /** @var Joomla\CMS\Document\ErrorDocument $this */
 
