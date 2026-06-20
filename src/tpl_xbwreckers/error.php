@@ -107,7 +107,7 @@ $errorCode = $this->error->getCode();
     . ' ' . $pageclass;
     echo ($this->direction == 'rtl' ? ' rtl' : '');
 ?>">
-	<header class="header container-header full-width<?php echo $stickyHeader ? ' ' . $stickyHeader : ''; ?>">
+	<header class="header container-header full-width">
 <div>
     	<div class="wrheader wrheadergrid" <?php echo $testMode; ?>>
         	<div class="wrheadergrid-item">

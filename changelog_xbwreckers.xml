@@ -5,7 +5,7 @@
 		<version>1.0.7.0</version>
 		<addition>
 			<item><![CDATA[<h3>Release Candidate v1.0.7.0</h3> Updated 18th June 2026]]></item>
-			<item>Error page uses template formats</item>
+			<item>Error page uses template format</item>
 		</addition>
 		<remove>
 		</remove>

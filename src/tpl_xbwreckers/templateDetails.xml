@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="template" client="site" method="upgrade">
 	<name>xbwreckers</name>
-	<version>1.0.6.0</version>
-	<creationDate>16th March 2026</creationDate>
+	<version>1.0.7.0</version>
+	<creationDate>20th June 2026</creationDate>
 	<author>Roger C-O</author>
 	<authorEmail>roger@crosborne.uk</authorEmail>
 	<copyright>(C) 2026,2017 Roger C-O and Open Source Matters, Inc.</copyright>
